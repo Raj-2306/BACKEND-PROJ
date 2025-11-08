@@ -3,6 +3,10 @@ import { DB_NAME } from "../src/constants.js";
 import express from "express";
 import connectDB from "../db/index.js";
 import dotenv from "dotenv";
+import userRouter from '../routes/user.routes.js'
+
+const app = express();
+
 
 dotenv.config({
     path: "./env"
@@ -12,21 +16,32 @@ dotenv.config({
 
 connectDB()
 .then(() => {
-    app.listen(process.env.PORT || 8000, () => {
-        console.log(`Server is running on port ${process.env.PORT}`);
-    });
+    
 })
 .catch((err) => {
     console.error("Error connecting to MongoDB:", err);
 });
 
 
+
+
+app.get("/", (req, res) => {
+    res.send("API is running...");
+}); 
+
+
+
+// routes declaration
+app.use("/api/v1/users",userRouter)
  
 
 
 
 
-// const app = express();
+
+app.listen(process.env.PORT, () => {
+        console.log(`Server is running on port ${process.env.PORT}`);
+    });
 
 
 // ;(async () => {
