@@ -4,12 +4,14 @@ import { upload } from "../middlewares/multer.middleware.js";
 
 const router = express.Router();
 
-router.post("/register").post(
-    umpload.fields([
-        { name: "avatar", maxCount: 1 },
-        { name: "coverImage", maxCount: 1 },
-    ]),
-    registerUser
+// ✅ Correct route setup
+router.post(
+  "/register",
+  upload.fields([
+    { name: "avatar", maxCount: 1 },
+    { name: "coverImage", maxCount: 1 },
+  ]),
+  registerUser
 );
 
 export default router;
