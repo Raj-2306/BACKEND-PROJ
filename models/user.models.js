@@ -13,6 +13,9 @@ const userSchema = new Schema({
     refreshToken: { type: String },
 }, { timestamps: true });
 
+
+
+
 // Hash password before saving
 userSchema.pre("save", async function(next) {
     if (!this.isModified("password")) return next();
@@ -20,12 +23,14 @@ userSchema.pre("save", async function(next) {
     next();
 });
 
+
 // Password comparison
 userSchema.methods.isPasswordCorrect = async function(password) {
     return await bcrypt.compare(password, this.password);
 };
 
-// Generate access token
+    
+// Generate access token (short lived[mins])
 userSchema.methods.generateAccessToken = function() {
     return jwt.sign(
         {
@@ -41,7 +46,7 @@ userSchema.methods.generateAccessToken = function() {
     );
 };
 
-// Generate refresh token
+// Generate refresh token(long lived[hourss])
 userSchema.methods.generateRefreshToken = function() {
     return jwt.sign(
         {
