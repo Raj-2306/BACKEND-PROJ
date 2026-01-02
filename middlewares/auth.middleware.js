@@ -1,4 +1,4 @@
-import asyncHandler from "../utils/asyncHandler";
+import asyncHandler from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import User from "../models/user.models.js";
 import jwt from "jsonwebtoken";
@@ -23,6 +23,5 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
     next();
     } catch (error) {
         throw new ApiError(401, error?.message || "invalid token");
-        
     }
 })  

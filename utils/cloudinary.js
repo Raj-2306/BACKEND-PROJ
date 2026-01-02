@@ -9,7 +9,7 @@ cloudinary.config({
 });
 
 //  Upload function
-export const uploadOnCloudinary = async (localFilePath) => {
+const uploadOnCloudinary = async (localFilePath) => {
   try {
     if (!localFilePath) {
       console.warn(" No file path provided to uploadOnCloudinary");
@@ -38,3 +38,5 @@ export const uploadOnCloudinary = async (localFilePath) => {
     return null;
   }
 };
+
+export default uploadOnCloudinary;
